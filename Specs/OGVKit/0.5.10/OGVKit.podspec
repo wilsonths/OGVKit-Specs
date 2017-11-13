@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/wilsonths/OGVKit.git",
+  s.source       = { :git => "https://github.com/brion/OGVKit.git",
                      :tag => s.version,
                      :submodules => true }
 
@@ -92,6 +92,10 @@ Pod::Spec.new do |s|
       swebmvorbis.dependency 'OGVKit/WebMDemuxer'
       swebmvorbis.dependency 'OGVKit/VorbisDecoder'
     end
+    swebm.subspec "Opus" do |swebmopus|
+      swebmopus.dependency 'OGVKit/WebMDemuxer'
+      swebmopus.dependency 'OGVKit/OpusDecoder'
+    end
   end
   s.subspec "MP4" do |smp4|
     smp4.dependency 'OGVKit/AVDecoder'
@@ -138,6 +142,11 @@ Pod::Spec.new do |s|
     svorbisdecoder.xcconfig = { 'OTHER_CFLAGS' => '-DOGVKIT_HAVE_VORBIS_DECODER' }
     svorbisdecoder.dependency 'OGVKit/Core'
     svorbisdecoder.dependency 'libvorbis'
+  end
+  s.subspec "OpusDecoder" do |sopusdecoder|
+    sopusdecoder.xcconfig = { 'OTHER_CFLAGS' => '-DOGVKIT_HAVE_OPUS_DECODER'  }
+    sopusdecoder.dependency 'OGVKit/Core'
+    sopusdecoder.dependency 'libopus'
   end
 
   # AVFoundation-backed playback for MP4, MP3
